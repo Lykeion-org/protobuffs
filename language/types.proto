@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package language;
+option go_package = "github.com/Lykeion/lexora-dictionary-service/internal/grpc/generated/language;language";
+
+enum WordType {
+    WORD_TYPE_UNSPECIFIED = 0;
+    WORD_TYPE_NOUN = 1;
+    WORD_TYPE_VERB = 2;
+    WORD_TYPE_ADJECTIVE = 3;
+    WORD_TYPE_ADVERB = 4;
+    WORD_TYPE_PRONOUN = 5;
+    WORD_TYPE_PREPOSITION = 6;
+    WORD_TYPE_CONJUNCTION = 7;
+    WORD_TYPE_INTERJECTION = 8;
+    WORD_TYPE_DETERMINER = 9;
+}
+
+enum SymbolType {
+    SYMBOL_TYPE_OBJECT = 0;
+    SYMBOL_TYPE_ACTION = 1;
+    SYMBOL_TYPE_MODIFIER = 2;
+}
+
+enum Language {
+    LANGUAGE_UNSPECIFIED = 0;
+    LANGUAGE_EN = 1;
+    LANGUAGE_NL = 2;
+    LANGUAGE_ES = 3;
+    LANGUAGE_PT = 4;
+    LANGUAGE_DE = 5;
+    LANGUAGE_FR = 6;
+}
+
+message Word {
+    string uid = 1;
+    string word = 2;
+    string sound_source = 3;
+    string ipa = 4;
+    WordType word_type = 5;
+}
+
+message Symbol {
+    string uid = 1;
+    Language language = 2;
+    SymbolType symbol_type = 3;
+    Word lemma = 4;
+    repeated Word words = 5;
+}
+
+message Referent {
+    string uid = 1;
+    string en_reference = 2;
+    string image_source = 3;
+    repeated Symbol symbols = 4;
+}
